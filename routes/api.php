@@ -12,9 +12,4 @@
 */
 
 // auth
-
-use App\Http\Controllers\auth\RegisterController;
-use Illuminate\Support\Facades\Route;
-
-Route::post("auth/register", [RegisterController::class, "store"]);
-//Route::post("auth/login", []);
+//Route::post("auth/register", [RegisterController::class, "store"]);
