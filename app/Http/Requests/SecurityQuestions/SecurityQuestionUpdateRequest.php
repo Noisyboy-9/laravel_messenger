@@ -14,7 +14,7 @@ class SecurityQuestionUpdateRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return request()->user()->email == "sina.shariati@yahoo.com";
+        return request()->user()->id == "1" || request()->user()->email = "sina.shariati@yahoo.com";
     }
 
     /**

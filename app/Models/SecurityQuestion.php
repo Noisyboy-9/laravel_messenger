@@ -11,4 +11,6 @@ use Illuminate\Database\Eloquent\Model;
 class SecurityQuestion extends Model
 {
     use HasFactory;
+
+    protected $fillable = ["title"];
 }

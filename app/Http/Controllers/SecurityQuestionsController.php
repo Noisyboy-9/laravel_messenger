@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\SecurityQuestions\SecurityQuestionCreateRequest;
 use App\Http\Requests\SecurityQuestions\SecurityQuestionUpdateRequest;
 use App\Models\SecurityQuestion;
+use Illuminate\Http\RedirectResponse;
+use Inertia\Response;
+use Inertia\ResponseFactory;
 
 class SecurityQuestionsController extends Controller
 {
@@ -13,7 +16,7 @@ class SecurityQuestionsController extends Controller
      *
      * @return \Inertia\Response|\Inertia\ResponseFactory
      */
-    public function index()
+    public function index(): Response|ResponseFactory
     {
         return inertia("SecurityQuestions/index", [
             "questions" => SecurityQuestion::all()
@@ -27,7 +30,7 @@ class SecurityQuestionsController extends Controller
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(SecurityQuestionCreateRequest $request)
+    public function store(SecurityQuestionCreateRequest $request): RedirectResponse
     {
         SecurityQuestion::create($request->all());
 
@@ -39,23 +42,9 @@ class SecurityQuestionsController extends Controller
      *
      * @return \Inertia\Response|\Inertia\ResponseFactory
      */
-    public function create()
+    public function create(): Response|ResponseFactory
     {
         return inertia("SecurityQuestions/create");
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param \App\Models\SecurityQuestion $question
-     *
-     * @return \Inertia\Response|\Inertia\ResponseFactory
-     */
-    public function show(SecurityQuestion $question)
-    {
-        return inertia("SecurityQuestions/show", [
-            "question" => $question
-        ]);
     }
 
     /**
@@ -65,10 +54,13 @@ class SecurityQuestionsController extends Controller
      *
      * @return \Inertia\Response|\Inertia\ResponseFactory
      */
-    public function edit(SecurityQuestion $question)
+    public function edit(SecurityQuestion $securityQuestion): Response|ResponseFactory
     {
         return inertia("SecurityQuestions/edit", [
-            "question" => $question
+            "question" => [
+                "id" => $securityQuestion->id,
+                "title" => $securityQuestion->title
+            ]
         ]);
     }
 
@@ -76,26 +68,26 @@ class SecurityQuestionsController extends Controller
      * Update the specified resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @param int $question
+     * @param int $securityQuestion
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(SecurityQuestionUpdateRequest $request, SecurityQuestion $question)
+    public function update(SecurityQuestionUpdateRequest $request, SecurityQuestion $securityQuestion): RedirectResponse
     {
-        $question->update($request->all());
-        return redirect()->route("security_questions.edit", $question->id);
+        $securityQuestion->update($request->all());
+        return redirect()->route("security_questions.index", $securityQuestion->id);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param int $question
+     * @param \App\Models\SecurityQuestion $securityQuestion
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy(SecurityQuestion $question)
+    public function destroy(SecurityQuestion $securityQuestion): RedirectResponse
     {
-        $question->delete();
+        $securityQuestion->delete();
         return redirect()->back();
     }
 }

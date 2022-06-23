@@ -36,4 +36,6 @@ Route::middleware([
 });
 
 // security questions
-Route::resource("security_questions", SecurityQuestionsController::class);
+Route::resource("security_questions", SecurityQuestionsController::class)
+    ->middleware("auth:web")
+    ->except(["show"]);
