@@ -14,7 +14,7 @@ return new class extends Migration {
     {
         Schema::create('security_questions', function (Blueprint $table) {
             $table->id();
-            $table->mediumText("security_question");
+            $table->mediumText("title");
             $table->timestamps();
         });
     }
