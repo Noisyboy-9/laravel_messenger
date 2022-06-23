@@ -20,7 +20,7 @@ class SecurityQuestionAnswersController extends Controller
     public function index(): Response|ResponseFactory
     {
         return inertia('SecurityQuestionsAnswers/index', [
-            "questions" => request()->user()->questions()
+            "questions" => request()->user()->securityQuestions()
         ]);
     }
 
@@ -32,7 +32,7 @@ class SecurityQuestionAnswersController extends Controller
     public function create(): Response|ResponseFactory
     {
         return inertia('SecurityQuestionsAnswers/create', [
-            "questions" => request()->user()->questions()
+            "questions" => request()->user()->securityQuestions()
         ]);
     }
 
@@ -45,7 +45,7 @@ class SecurityQuestionAnswersController extends Controller
      */
     public function store(SecurityQuestionAnswerInsertRequest $request): RedirectResponse
     {
-        $request->user()->questions()->insert($request->all());
+        $request->user()->securityQuestions()->insert($request->all());
 
         return redirect()->route('security_questions_answers.index');
     }

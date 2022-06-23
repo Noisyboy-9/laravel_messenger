@@ -3,6 +3,7 @@
 namespace App\Http\Requests\SecurityQuestionAnswers;
 
 use Illuminate\Foundation\Http\FormRequest;
+use JetBrains\PhpStorm\ArrayShape;
 
 class SecurityQuestionAnswerUpdateRequest extends FormRequest
 {
@@ -11,9 +12,11 @@ class SecurityQuestionAnswerUpdateRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
-        return false;
+        $answer = $this->route->parameter('answer');
+        return $answer->user_id == $this->user()->id;
+
     }
 
     /**
@@ -21,10 +24,10 @@ class SecurityQuestionAnswerUpdateRequest extends FormRequest
      *
      * @return array<string, mixed>
      */
-    public function rules()
+    #[ArrayShape(['question_id' => "string[]", 'answer' => "string[]"])] public function rules(): array
     {
         return [
-            //
+            'answer' => ['required', 'min:4']
         ];
     }
 }
