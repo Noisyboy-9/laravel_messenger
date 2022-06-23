@@ -59,8 +59,8 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
-    public function securityQuestions(): HasMany
+    public function invites(): HasMany
     {
-        return $this->hasMany(SecurityQuestionAnswer::class, 'user_id', 'id');
+        return $this->hasMany(Invite::class, 'invited_id', 'id');
     }
 }

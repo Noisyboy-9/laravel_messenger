@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\InviteResultController;
 use App\Http\Controllers\SecurityQuestionAnswersController;
 use App\Http\Controllers\SecurityQuestionsController;
+use App\Http\Controllers\UserInvitesController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -41,4 +43,13 @@ Route::resource("security_questions", SecurityQuestionsController::class)
     ->middleware("auth:web")
     ->except(["show"]);
 
-Route::resource('security_questions_answers', SecurityQuestionAnswersController::class);
+// security questions answers
+Route::resource('security_questions_answers', SecurityQuestionAnswersController::class)
+    ->middleware("auth:web")
+    ->except("show");
+
+
+Route::post('/invites', [UserInvitesController::class, 'index'])->middleware('auth:web');
+Route::post('/users/{user}/invite', [UserInvitesController::class, 'store'])->middleware('auth:web');
+Route::post('/invites/{invite}/accept', [InviteResultController::class, 'accept'])->middleware('auth:web');
+Route::post('/invites/{invite}/accept', [InviteResultController::class, 'reject'])->middleware('auth:web');
