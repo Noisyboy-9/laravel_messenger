@@ -13,4 +13,9 @@ class SecurityQuestion extends Model
     use HasFactory;
 
     protected $fillable = ["title"];
+
+    public function answers()
+    {
+        return $this->hasMany(SecurityQuestionAnswer::class, "question_id", "id");
+    }
 }

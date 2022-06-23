@@ -8,16 +8,17 @@ import JetLabel from '@/Jetstream/Label.vue';
 import JetValidationErrors from '@/Jetstream/ValidationErrors.vue';
 
 const form = useForm({
-    title: ''
+    answer: '',
+    question_id: ''
 });
 
 const submit = () => {
-    form.post(route('security_questions.store'));
+    form.post(route('security_questions_answers.store'));
 };
 </script>
 
 <template>
-    <Head title="Add Security Question"/>
+    <Head title="Answer Security Question"/>
 
     <JetAuthenticationCard>
         <template #logo>
@@ -28,14 +29,14 @@ const submit = () => {
 
         <form @submit.prevent="submit">
             <h3 class="text-lg font-medium text-gray-900 my-3">
-                New Question
+                New Answer
             </h3>
             <div>
-                <JetLabel for="title" value="Title"/>
+                <JetLabel for="question_id" value="question_id"/>
                 <JetInput
-                    id="title"
-                    v-model="form.title"
-                    autocomplete="title"
+                    id="question_id"
+                    v-model="form.question_id"
+                    autocomplete="question_id"
                     autofocus
                     class="mt-1 block w-full"
                     required
@@ -43,6 +44,19 @@ const submit = () => {
                 />
             </div>
 
+
+            <div>
+                <JetLabel for="answer" value="answer"/>
+                <JetInput
+                    id="answer"
+                    v-model="form.answer"
+                    autocomplete="answer"
+                    autofocus
+                    class="mt-1 block w-full"
+                    required
+                    type="text"
+                />
+            </div>
             <div class="flex items-center justify-start mt-4">
 
                 <JetButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing" class="">

@@ -61,6 +61,6 @@ class User extends Authenticatable
 
     public function securityQuestions(): HasMany
     {
-        return $this->hasMany(SecurityQuestionAnswer::class, 'question_id', 'id');
+        return $this->hasMany(SecurityQuestionAnswer::class, 'user_id', 'id');
     }
 }

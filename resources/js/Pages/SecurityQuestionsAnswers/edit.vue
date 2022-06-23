@@ -8,15 +8,15 @@ import JetLabel from '@/Jetstream/Label.vue';
 import JetValidationErrors from '@/Jetstream/ValidationErrors.vue';
 
 defineProps({
-    question: Object
+    answer: Object
 });
 
 const form = useForm({
-    title: ''
+    answer: ''
 });
 
-const submit = (id) => {
-    form.patch(`/security_questions/${id}`);
+const update = (id) => {
+    form.patch(`/security_questions_answers/${id}`);
 };
 
 </script>
@@ -31,15 +31,15 @@ const submit = (id) => {
 
         <JetValidationErrors class="mb-4"/>
 
-        <form @submit.prevent="submit(question.id)">
+        <form @submit.prevent="update(answer.id)">
             <h3 class="text-lg font-medium text-gray-900 my-3">
                 Edit Question
             </h3>
             <div>
-                <JetLabel for="title" value="Title"/>
+                <JetLabel for="answer" value="Answer"/>
                 <JetInput
-                    id="title"
-                    v-model="form.title"
+                    id="answer"
+                    v-model="form.answer"
                     autofocus
                     class="mt-1 block w-full"
                     type="text"

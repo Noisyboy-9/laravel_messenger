@@ -14,9 +14,7 @@ class SecurityQuestionAnswerUpdateRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        $answer = $this->route->parameter('answer');
-        return $answer->user_id == $this->user()->id;
-
+        return true;
     }
 
     /**

@@ -19,9 +19,30 @@ class SecurityQuestionAnswersController extends Controller
      */
     public function index(): Response|ResponseFactory
     {
+        $questions = SecurityQuestionAnswer::where(['user_id' => auth()->id()])->get();
+        $questionWithAnswers = $questions->loadMissing('question')->toArray();
         return inertia('SecurityQuestionsAnswers/index', [
-            "questions" => request()->user()->securityQuestions()
+            "answers" => $questionWithAnswers,
         ]);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param \App\Http\Requests\SecurityQuestionAnswers\SecurityQuestionAnswerInsertRequest $request
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Psr\Container\ContainerExceptionInterface
+     * @throws \Psr\Container\NotFoundExceptionInterface
+     */
+    public function store(SecurityQuestionAnswerInsertRequest $request): RedirectResponse
+    {
+        SecurityQuestionAnswer::create([
+            "user_id" => auth()->id(),
+            "question_id" => request()->get("question_id"),
+            "answer" => request()->get("answer"),
+        ]);
+        return redirect()->route('security_questions_answers.index');
     }
 
     /**
@@ -37,30 +58,16 @@ class SecurityQuestionAnswersController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function store(SecurityQuestionAnswerInsertRequest $request): RedirectResponse
-    {
-        $request->user()->securityQuestions()->insert($request->all());
-
-        return redirect()->route('security_questions_answers.index');
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param int $id
      *
      * @return \Inertia\Response|\Inertia\ResponseFactory
      */
-    public function edit(SecurityQuestionAnswer $securityQuestionAnswer): Response|ResponseFactory
+    public function edit(SecurityQuestionAnswer $securityQuestionsAnswer): Response|ResponseFactory
     {
-        return inertia('SecurityQuestionsAnswers/index', [
-            "question" => $securityQuestionAnswer->question()
+        return inertia('SecurityQuestionsAnswers/edit', [
+            "answer" => $securityQuestionsAnswer
         ]);
     }
 
@@ -72,9 +79,9 @@ class SecurityQuestionAnswersController extends Controller
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function updates(SecurityQuestionAnswerUpdateRequest $request, SecurityQuestionAnswer $securityQuestionAnswer): RedirectResponse
+    public function update(SecurityQuestionAnswerUpdateRequest $request, SecurityQuestionAnswer $securityQuestionsAnswer): RedirectResponse
     {
-        $securityQuestionAnswer->update($request->all());
+        $securityQuestionsAnswer->update($request->all());
         return redirect()->route('security_questions_answers.index');
     }
 
@@ -85,9 +92,9 @@ class SecurityQuestionAnswersController extends Controller
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy(SecurityQuestionAnswer $securityQuestionAnswer): RedirectResponse
+    public function destroy(SecurityQuestionAnswer $securityQuestionsAnswer): RedirectResponse
     {
-        $securityQuestionAnswer->delete();
+        $securityQuestionsAnswer->delete();
         return redirect()->route('security_questions_answers.index');
     }
 }

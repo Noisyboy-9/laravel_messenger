@@ -1137,6 +1137,9 @@ select {
 .-mb-10 {
   margin-bottom: -2.5rem;
 }
+.mb-2 {
+  margin-bottom: 0.5rem;
+}
 .block {
   display: block;
 }

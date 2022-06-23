@@ -10,6 +10,8 @@ class SecurityQuestionAnswer extends Model
 {
     use HasFactory;
 
+    protected $fillable = ["user_id", "question_id", "answer"];
+
     public function owner(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
