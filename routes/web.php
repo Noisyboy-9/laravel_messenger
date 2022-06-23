@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\SecurityQuestionAnswersController;
 use App\Http\Controllers\SecurityQuestionsController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -39,3 +40,5 @@ Route::middleware([
 Route::resource("security_questions", SecurityQuestionsController::class)
     ->middleware("auth:web")
     ->except(["show"]);
+
+Route::resource('security_questions_answers', SecurityQuestionAnswersController::class);
