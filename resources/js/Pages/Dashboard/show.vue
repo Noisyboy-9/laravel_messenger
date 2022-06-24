@@ -13,6 +13,10 @@ defineProps({
     }
 });
 
+const blockUser = (user) => {
+    Inertia.post(`/users/${user.id}/block`);
+};
+
 const inviteUser = (user) => {
     Inertia.post(`/users/${user.id}/invite`);
 };

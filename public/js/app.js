@@ -23701,11 +23701,16 @@ __webpack_require__.r(__webpack_exports__);
     var expose = _ref.expose;
     expose();
 
+    var blockUser = function blockUser(user) {
+      _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_2__.Inertia.post("/users/".concat(user.id, "/block"));
+    };
+
     var inviteUser = function inviteUser(user) {
       _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_2__.Inertia.post("/users/".concat(user.id, "/invite"));
     };
 
     var __returned__ = {
+      blockUser: blockUser,
       inviteUser: inviteUser,
       AppLayout: _Layouts_AppLayout_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
       JetButton: _Jetstream_Button_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
@@ -28216,7 +28221,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetButton"], {
         "class": "bg-red-500",
         onClick: _cache[1] || (_cache[1] = function ($event) {
-          return _ctx.blockUser($props.viewingUser);
+          return $setup.blockUser($props.viewingUser);
         })
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
