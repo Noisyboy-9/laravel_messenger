@@ -13,16 +13,15 @@ class MessagesController extends Controller
 {
     public function index(User $user): Response|ResponseFactory
     {
-        $sentMessages = auth()->user()->sentMessages()->where('receiver_id', $user->id)->get();
-        $receivedMessages = auth()->user()->receivedMessages()->where('sender_id', $user->id)->get();
+        $sentMessages = auth()->user()->sentMessages()->where('receiver_id', $user->id)->orderBy('created_at')->get()->loadMissing(['sender', 'receiver']);
+        $receivedMessages = auth()->user()->receivedMessages()->where('sender_id', $user->id)->orderBy('created_at')->get()->loadMissing(['sender', 'receiver']);
 
-        $messages = $sentMessages->merge($receivedMessages);
-        $messages->sortByDesc('created_at');
+        $messages = $receivedMessages->merge($sentMessages)->sortBy('created_at');
 
         return inertia("Message/show", [
             'messages' => $messages,
             'auth' => auth()->user(),
-            'user' => $user
+            'chattingWithUser' => $user
         ]);
     }
 

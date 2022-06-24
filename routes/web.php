@@ -89,6 +89,6 @@ Route::get('/users/{user}/messages', [MessagesController::class, "index"])->midd
 Route::delete('/messages/{message}', [MessagesController::class, "destroy"])->middleware('auth:web')->name('messages.destroy');
 
 // a route for liking message -> like: messages/{message}/like
-Route::post('/messages/{message}/like', [MessageLikesController::class, 'store'])->middleware('auth:web', 'connected')->name('message_like.store');
-Route::delete('/messages/{message}/like', [MessageLikesController::class, 'destroy'])->middleware('auth:web', 'connected')->name('message_like.destroy');
+Route::post('/messages/{message}/like', [MessageLikesController::class, 'store'])->middleware('auth:web')->name('message_like.store');
+Route::delete('/messages/{message}/like', [MessageLikesController::class, 'destroy'])->middleware('auth:web')->name('message_like.destroy');
 
