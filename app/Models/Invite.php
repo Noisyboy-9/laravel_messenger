@@ -9,7 +9,7 @@ class Invite extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['inviter_id', 'invited_id', 'accepted'];
+    protected $fillable = ['inviter_id', 'invited_id', 'status'];
 
 
     public function inviter()

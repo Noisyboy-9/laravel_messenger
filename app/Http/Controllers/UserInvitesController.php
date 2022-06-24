@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\laravel_messenger\InviteStatusManager;
 use App\Models\Invite;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
@@ -18,7 +19,7 @@ class UserInvitesController extends Controller
     public function index(): Response|ResponseFactory
     {
         return inertia('Invites/index', [
-            'invites' => auth()->user()->invites()->where('accepted', 'NULL')->with(['inviter', 'invited'])->get()
+            'invites' => auth()->user()->invites()->where('status', InviteStatusManager::WAITING)->with(['inviter', 'invited'])->get()
         ]);
     }
 

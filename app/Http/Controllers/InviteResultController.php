@@ -2,26 +2,28 @@
 
 namespace App\Http\Controllers;
 
+use App\laravel_messenger\InviteStatusManager;
 use App\Models\Connection;
 use App\Models\Invite;
 use Illuminate\Http\RedirectResponse;
 
 class InviteResultController extends Controller
 {
-    public function accept(Invite $invite)
+    public function accept(Invite $invite): RedirectResponse
     {
         $invite->update([
-            'accepted' => true,
+            'status' => InviteStatusManager::ACCEPTED,
         ]);
 
+
         Connection::create([
-            'connector_id' => $invite->invitor_id,
+            'connector_id' => $invite->inviter_id,
             'connected_id' => $invite->invited_id
         ]);
 
         Connection::create([
             'connector_id' => $invite->invited_id,
-            'connected_id' => $invite->invitor_id
+            'connected_id' => $invite->inviter_id
         ]);
 
         return redirect()->back();
@@ -30,7 +32,7 @@ class InviteResultController extends Controller
     public function reject(Invite $invite): RedirectResponse
     {
         $invite->update([
-            'accepted' => false,
+            'status' => InviteStatusManager::REJECTED,
         ]);
 
         return redirect()->back();

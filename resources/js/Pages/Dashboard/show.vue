@@ -4,7 +4,7 @@ import JetButton from '@/Jetstream/Button.vue';
 import {Inertia} from '@inertiajs/inertia';
 
 defineProps({
-    user: {
+    viewingUser: {
         type: Object,
         default: []
     },
@@ -19,14 +19,14 @@ const inviteUser = (user) => {
 
 </script>
 <template>
-    <AppLayout :title="user.name">
-        <template v-if="auth.id!==user.id" #header>
+    <AppLayout :title="viewingUser.name">
+        <template v-if="auth.id!==viewingUser.id" #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ user.name }}
+                {{ viewingUser.name }}
             </h2>
         </template>
 
-        <template v-if="auth.id===user.id" #header>
+        <template v-if="auth.id===viewingUser.id" #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 Saved Messages
             </h2>
@@ -36,14 +36,14 @@ const inviteUser = (user) => {
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden sm:rounded-lg flex justify-between">
                     <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                        {{ user.name }}
+                        {{ viewingUser.name }}
                     </h2>
 
 
-                    <div v-if="user.id !== auth.id">
+                    <div v-if="viewingUser.id !== auth.id">
                         <JetButton
                             class="mr-3 bg-green-600"
-                            @click="inviteUser(user)"
+                            @click="inviteUser(viewingUser)"
                         >
                             Invite
                         </JetButton>
@@ -51,7 +51,7 @@ const inviteUser = (user) => {
 
                         <JetButton
                             class="bg-red-500"
-                            @click="blockUser(user)"
+                            @click="blockUser(viewingUser)"
                         >
                             Block
                         </JetButton>

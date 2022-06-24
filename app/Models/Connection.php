@@ -9,5 +9,5 @@ class Connection extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['connector_id', 'connection_id'];
+    protected $fillable = ['connector_id', 'connected_id'];
 }

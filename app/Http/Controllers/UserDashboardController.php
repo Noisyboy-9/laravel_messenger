@@ -9,7 +9,7 @@ class UserDashboardController extends Controller
     public function show(User $user)
     {
         return inertia('Dashboard/show', [
-            "user" => $user,
+            "viewingUser" => $user,
             "auth" => auth()->user()
         ]);
     }
