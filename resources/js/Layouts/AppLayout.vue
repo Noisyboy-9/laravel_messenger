@@ -77,11 +77,6 @@ const logout = () => {
                                 </JetNavLink>
                             </div>
 
-                            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                                <JetNavLink :active="route().current('connected')" :href="route('connected')">
-                                    Connected
-                                </JetNavLink>
-                            </div>
                             <div v-if="title==='Dashboard'" class="ml-5 shrink-0 flex items-center">
                                 <search :users="users" class="py-5"/>
                             </div>

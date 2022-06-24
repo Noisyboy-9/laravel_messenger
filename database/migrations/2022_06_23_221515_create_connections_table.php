@@ -14,7 +14,7 @@ return new class extends Migration {
     {
         Schema::create('connections', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('connector_id')->references('id')->on('users')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('connecter_id')->references('id')->on('users')->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreignId('connected_id')->references('id')->on('users')->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
         });

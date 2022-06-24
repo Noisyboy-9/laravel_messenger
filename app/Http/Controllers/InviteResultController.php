@@ -17,12 +17,12 @@ class InviteResultController extends Controller
 
 
         Connection::create([
-            'connector_id' => $invite->inviter_id,
+            'connecter_id' => $invite->inviter_id,
             'connected_id' => $invite->invited_id
         ]);
 
         Connection::create([
-            'connector_id' => $invite->invited_id,
+            'connecter_id' => $invite->invited_id,
             'connected_id' => $invite->inviter_id
         ]);
 

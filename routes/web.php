@@ -4,8 +4,7 @@ use App\Http\Controllers\InviteResultController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\SecurityQuestionAnswersController;
 use App\Http\Controllers\SecurityQuestionsController;
-use App\Http\Controllers\UserConectionsController;
-use App\Http\Controllers\UserConnectedController;
+use App\Http\Controllers\UserConnectionsController;
 use App\Http\Controllers\UserDashboardController;
 use App\Http\Controllers\UserInvitedController;
 use App\Http\Controllers\UserInvitesController;
@@ -58,8 +57,7 @@ Route::resource('security_questions_answers', SecurityQuestionAnswersController:
 Route::get('/invites', [UserInvitesController::class, 'index'])->middleware('auth:web')->name('invites');
 Route::get('/invited', [UserInvitedController::class, 'index'])->middleware('auth:web')->name('invited');
 
-Route::get('/connections', [UserConectionsController::class, 'index'])->middleware('auth:web')->name('connections');
-Route::get('/connected', [UserConnectedController::class, 'index'])->middleware('auth:web')->name('connected');
+Route::get('/connections', [UserConnectionsController::class, 'index'])->middleware('auth:web')->name('connections');
 
 Route::post('/users/{user}/invite', [UserInvitesController::class, 'store'])->middleware('auth:web');
 Route::post('/invites/{invite}/accept', [InviteResultController::class, 'accept'])->middleware('auth:web');

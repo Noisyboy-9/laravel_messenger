@@ -74,7 +74,7 @@ class User extends Authenticatable
 
     public function connections(): HasMany
     {
-        return $this->hasMany(Connection::class, 'connection_id', 'id');
+        return $this->hasMany(Connection::class, 'connecter_id', 'id');
     }
 
     public function connecteds(): HasMany

@@ -3,24 +3,18 @@ import {Head} from '@inertiajs/inertia-vue3';
 import JetAuthenticationCardLogo from '@/Jetstream/AuthenticationCardLogo.vue';
 import {Inertia} from '@inertiajs/inertia';
 
-
-const rejectInvitation = (invite) => {
-    Inertia.post(`/invites/${invite.id}/reject`);
+const blockUser = (user) => {
+    Inertia.post(`/users/${user.id}/block`);
 };
 
-const acceptInvitation = (invite) => {
-    let url = `/invites/${invite.id}/accept`;
-    console.log(url);
-    Inertia.post(url);
-};
 
 defineProps({
-    inviteds: Array,
+    connections: Array,
 });
 </script>
 
 <template>
-    <Head title="Inviteds"/>
+    <Head title="Connections"/>
 
     <div class="font-sans text-gray-900 antialiased">
         <div class="pt-4 bg-gray-100">
@@ -31,19 +25,20 @@ defineProps({
 
 
                 <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                    Users that you have invited to connect
+                    Your connections
                 </h2>
 
 
-                <div v-for="invited in inviteds"
+                <div v-for="connection in connections"
                      class="w-full sm:max-w-2xl flex align-baseline justify-between p-6 bg-white shadow-md overflow-hidden sm:rounded-lg mb-2">
                     <h2 class="font-semibold text-xl text-gray-800">
-                        {{ invited.invited.name }}
+                        {{ connection.connected.name }}
                     </h2>
+
 
                     <div>
                         <p class="ml-3 font-medium text-sm truncate">
-                            {{ invited.created_at }}
+                            {{ connection.created_at }}
                         </p>
                     </div>
                 </div>

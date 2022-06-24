@@ -21,7 +21,7 @@ defineProps({
 </script>
 
 <template>
-    <Head title="Security Questions Answer"/>
+    <Head title="invites"/>
 
     <div class="font-sans text-gray-900 antialiased">
         <div class="pt-4 bg-gray-100">
