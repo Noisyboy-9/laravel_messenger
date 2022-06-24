@@ -67,6 +67,22 @@ class User extends Authenticatable
         return $this->hasMany(Invite::class, 'invited_id', 'id');
     }
 
+    public function inviteds(): HasMany
+    {
+        return $this->hasMany(Invite::class, "inviter_id", 'id');
+    }
+
+    public function connections(): HasMany
+    {
+        return $this->hasMany(Connection::class, 'connection_id', 'id');
+    }
+
+    public function connecteds(): HasMany
+    {
+        return $this->hasMany(Invite::class, 'connected_id', 'id');
+    }
+
+
     public function searchableUsing()
     {
         return app(EngineManager::class)->engine('meilisearch');

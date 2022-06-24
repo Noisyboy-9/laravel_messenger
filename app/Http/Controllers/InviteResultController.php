@@ -11,7 +11,7 @@ class InviteResultController extends Controller
     public function accept(Invite $invite)
     {
         $invite->update([
-            'accepted' => false,
+            'accepted' => true,
         ]);
 
         Connection::create([

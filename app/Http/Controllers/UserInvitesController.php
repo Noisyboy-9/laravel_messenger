@@ -18,7 +18,7 @@ class UserInvitesController extends Controller
     public function index(): Response|ResponseFactory
     {
         return inertia('Invites/index', [
-            'invites' => auth()->user()->invites()->where('accepted', 'NULL')
+            'invites' => auth()->user()->invites()->where('accepted', 'NULL')->with(['inviter', 'invited'])->get()
         ]);
     }
 
@@ -29,11 +29,11 @@ class UserInvitesController extends Controller
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(User $invited): RedirectResponse
+    public function store(User $user): RedirectResponse
     {
         Invite::create([
             'inviter_id' => auth()->id(),
-            'invited_id' => $invited->id,
+            'invited_id' => $user->id,
             'accepted' => false,
         ]);
 

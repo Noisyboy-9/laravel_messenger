@@ -16,7 +16,7 @@ return new class extends Migration {
             $table->id();
             $table->foreignId('inviter_id')->references('id')->on('users')->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreignId('invited_id')->references('id')->on('users')->cascadeOnDelete()->cascadeOnUpdate();
-            $table->boolean('accepted')->nullable();
+            $table->boolean('accepted')->nullable()->default('NULL');
             $table->timestamps();
         });
     }

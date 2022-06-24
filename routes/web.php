@@ -4,6 +4,10 @@ use App\Http\Controllers\InviteResultController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\SecurityQuestionAnswersController;
 use App\Http\Controllers\SecurityQuestionsController;
+use App\Http\Controllers\UserConectionsController;
+use App\Http\Controllers\UserConnectedController;
+use App\Http\Controllers\UserDashboardController;
+use App\Http\Controllers\UserInvitedController;
 use App\Http\Controllers\UserInvitesController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -51,11 +55,20 @@ Route::resource('security_questions_answers', SecurityQuestionAnswersController:
 
 
 //invites and connection
-Route::post('/invites', [UserInvitesController::class, 'index'])->middleware('auth:web');
+Route::get('/invites', [UserInvitesController::class, 'index'])->middleware('auth:web')->name('invites');
+Route::get('/invited', [UserInvitedController::class, 'index'])->middleware('auth:web')->name('invited');
+
+Route::get('/connections', [UserConectionsController::class, 'index'])->middleware('auth:web')->name('connections');
+Route::get('/connected', [UserConnectedController::class, 'index'])->middleware('auth:web')->name('connected');
+
 Route::post('/users/{user}/invite', [UserInvitesController::class, 'store'])->middleware('auth:web');
 Route::post('/invites/{invite}/accept', [InviteResultController::class, 'accept'])->middleware('auth:web');
-Route::post('/invites/{invite}/accept', [InviteResultController::class, 'reject'])->middleware('auth:web');
+Route::post('/invites/{invite}/reject', [InviteResultController::class, 'reject'])->middleware('auth:web');
 
 // searching
-Route::get('/search', [SearchController::class, "search"]);
+Route::get('/search', [SearchController::class, "search"])->middleware('auth:web');
+
+
+//profile and messaging
+Route::get('/users/{user}', [UserDashboardController::class, "show"])->middleware('auth:web');
 

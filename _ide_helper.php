@@ -16596,6 +16596,37 @@
         class Str {
          
     }
+            /**
+     * 
+     *
+     * @template TKey of array-key
+     * @template TValue
+     * @implements \ArrayAccess<TKey, TValue>
+     * @implements \Illuminate\Support\Enumerable<TKey, TValue>
+     */ 
+        class Collection {
+                    /**
+         * 
+         *
+         * @see \App\Models\User::observe()
+         * @static 
+         */ 
+        public static function searchable()
+        {
+                        return \Illuminate\Support\Collection::searchable();
+        }
+                    /**
+         * 
+         *
+         * @see \App\Models\User::updateTimestamps()
+         * @static 
+         */ 
+        public static function unsearchable()
+        {
+                        return \Illuminate\Support\Collection::unsearchable();
+        }
+         
+    }
      
 }
 
@@ -17674,6 +17705,46 @@
         public static function inertiaPage()
         {
                         return \Illuminate\Testing\TestResponse::inertiaPage();
+        }
+         
+    }
+     
+}
+
+    namespace Illuminate\Database\Eloquent\Relations { 
+            /**
+     * 
+     *
+     */ 
+        class HasManyThrough {
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class Relation {
+                    /**
+         * 
+         *
+         * @see \Laravel\Scout\SearchableScope::extend()
+         * @param mixed $chunk
+         * @static 
+         */ 
+        public static function searchable($chunk = null)
+        {
+                        return \Illuminate\Database\Eloquent\Relations\Relation::searchable($chunk);
+        }
+                    /**
+         * 
+         *
+         * @see \Laravel\Scout\SearchableScope::extend()
+         * @param mixed $chunk
+         * @static 
+         */ 
+        public static function unsearchable($chunk = null)
+        {
+                        return \Illuminate\Database\Eloquent\Relations\Relation::unsearchable($chunk);
         }
          
     }

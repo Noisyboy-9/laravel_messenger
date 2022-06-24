@@ -35,11 +35,11 @@ export default {
         },
 
         searchChange(q) {
-            Inertia.get(`/search`, {q}, {
-                preserveState: true,
-                preserveScroll: true,
-                replace: true
-            });
+            // Inertia.get(`/search`, {q}, {
+            //     preserveState: true,
+            //     preserveScroll: true,
+            //     replace: true
+            // });
         }
     }
 };

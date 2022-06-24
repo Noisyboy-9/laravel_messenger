@@ -12,7 +12,6 @@ class SearchController extends Controller
     public function search(): Response|ResponseFactory
     {
         $users = User::search(request()->query('q'))->get();
-
         return inertia('Dashboard', [
             'title' => 'dashboard',
             'users' => $users

@@ -1,16 +1,22 @@
 <script setup>
-import {Head, Link} from '@inertiajs/inertia-vue3';
+import {Head} from '@inertiajs/inertia-vue3';
 import JetAuthenticationCardLogo from '@/Jetstream/AuthenticationCardLogo.vue';
-import JetDangerButton from '@/Jetstream/DangerButton.vue';
 import {Inertia} from '@inertiajs/inertia';
+import JetDangerButton from '@/Jetstream/DangerButton.vue';
 
-const deleteAnswer = (id) => {
-    console.log(id);
-    Inertia.delete(route('security_questions_answers.destroy', id));
+
+const rejectInvitation = (invite) => {
+    Inertia.post(`/invites/${invite.id}/reject`);
+};
+
+const acceptInvitation = (invite) => {
+    let url = `/invites/${invite.id}/accept`;
+    console.log(url);
+    Inertia.post(url);
 };
 
 defineProps({
-    answers: Array,
+    invites: Array,
 });
 </script>
 
@@ -25,31 +31,27 @@ defineProps({
                 </div>
 
 
-                <div v-for="answer in answers"
-                     class="w-full sm:max-w-2xl  mt-6 px-6 py-6 bg-white shadow-md overflow-hidden sm:rounded-lg prose">
-                    <h2 class="font-semibold text-xl text-gray-800 mb-2 pb-0">
-                        {{ answer.question.title }}
+                <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                    Users that have invited you to connect
+                </h2>
+
+
+                <div v-for="invite in invites"
+                     class="w-full sm:max-w-2xl flex align-baseline justify-between mt-6 px-6 py-6 bg-white shadow-md overflow-hidden sm:rounded-lg prose">
+                    <h2 class="font-semibold text-xl text-gray-800 -mb-10 pb-0">
+                        {{ invite.inviter.name }}
                     </h2>
 
-                    <p class="mt-1 text-sm text-gray-600">
-                        {{ answer.answer }}
-                    </p>
-
                     <div>
-                        <Link
-                            :href="'/security_questions_answers/' + answer.id + '/edit'"
-                            class="mx-5 inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:ring-blue-200 active:text-gray-800 active:bg-gray-50 disabled:opacity-25 transition">
-                            Update
-                        </Link>
-                        <JetDangerButton @click="deleteAnswer(answer.id)">Delete</JetDangerButton>
+                        <JetButton
+                            :href="`invites/${invites.id}/accept`"
+                            class="mx-5 inline-flex text-white no-underline items-center px-4 py-2 bg-green-600 border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:ring-blue-200 active:text-gray-800 active:bg-green-800 disabled:opacity-25 transition"
+                            @click="acceptInvitation(invite)">
+                            Accept
+                        </JetButton>
+                        <JetDangerButton @click="rejectInvitation(invite)">Reject</JetDangerButton>
                     </div>
                 </div>
-
-                <Link
-                    class="inline-flex items-center px-4 bg-green-500 mt-3 text-white py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:ring focus:ring-blue-200 active:text-gray-800 active:bg-gray-50 disabled:opacity-25 transition"
-                    href="/security_questions_answers/create">
-                    Add
-                </Link>
             </div>
         </div>
     </div>
