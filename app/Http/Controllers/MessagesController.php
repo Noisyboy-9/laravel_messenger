@@ -17,6 +17,7 @@ class MessagesController extends Controller
         $receivedMessages = auth()->user()->receivedMessages()->where('sender_id', $user->id)->get();
 
         $messages = $sentMessages->merge($receivedMessages);
+        $messages->sortByDesc('created_at');
 
         return inertia("Message/show", [
             'messages' => $messages,
@@ -27,8 +28,7 @@ class MessagesController extends Controller
 
     public function store(MessageInsertRequest $request): RedirectResponse
     {
-        auth()->user()->sentMessages()->insert([
-            'sender_id' => auth()->id(),
+        auth()->user()->sentMessages()->create([
             'receiver_id' => $request->get('receiver_id'),
             'body' => $request->get('body')
         ]);
