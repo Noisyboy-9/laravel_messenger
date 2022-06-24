@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BlocksController;
 use App\Http\Controllers\InviteResultController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\SecurityQuestionAnswersController;
@@ -69,4 +70,8 @@ Route::get('/search', [SearchController::class, "search"])->middleware('auth:web
 
 //profile and messaging
 Route::get('/users/{user}', [UserDashboardController::class, "show"])->middleware('auth:web');
+
+// block
+Route::post('/users/{user}/block', [BlocksController::class, "store"])->middleware('auth:web')->name("block.store");
+Route::post('/users/{user}/unblock', [BlocksController::class, "destroy"])->middleware('auth:web')->name("block.destroy");
 

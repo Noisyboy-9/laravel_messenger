@@ -88,5 +88,9 @@ class User extends Authenticatable
         return app(EngineManager::class)->engine('meilisearch');
     }
 
+    public function blocks(): HasMany
+    {
+        return $this->hasMany(Block::class, "blocker_id", "id");
+    }
 }
 
