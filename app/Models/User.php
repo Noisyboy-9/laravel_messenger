@@ -9,6 +9,8 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
+use Laravel\Scout\EngineManager;
+use Laravel\Scout\Searchable;
 
 class User extends Authenticatable
 {
@@ -17,6 +19,7 @@ class User extends Authenticatable
     use HasProfilePhoto;
     use Notifiable;
     use TwoFactorAuthenticatable;
+    use Searchable;
 
     /**
      * The attributes that are mass assignable.
@@ -63,4 +66,11 @@ class User extends Authenticatable
     {
         return $this->hasMany(Invite::class, 'invited_id', 'id');
     }
+
+    public function searchableUsing()
+    {
+        return app(EngineManager::class)->engine('meilisearch');
+    }
+
 }
+

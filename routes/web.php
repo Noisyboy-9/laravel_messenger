@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\InviteResultController;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\SecurityQuestionAnswersController;
 use App\Http\Controllers\SecurityQuestionsController;
 use App\Http\Controllers\UserInvitesController;
@@ -49,7 +50,12 @@ Route::resource('security_questions_answers', SecurityQuestionAnswersController:
     ->except("show");
 
 
+//invites and connection
 Route::post('/invites', [UserInvitesController::class, 'index'])->middleware('auth:web');
 Route::post('/users/{user}/invite', [UserInvitesController::class, 'store'])->middleware('auth:web');
 Route::post('/invites/{invite}/accept', [InviteResultController::class, 'accept'])->middleware('auth:web');
 Route::post('/invites/{invite}/accept', [InviteResultController::class, 'reject'])->middleware('auth:web');
+
+// searching
+Route::get('/search', [SearchController::class, "search"]);
+
