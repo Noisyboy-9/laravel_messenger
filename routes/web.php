@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BlocksController;
 use App\Http\Controllers\InviteResultController;
+use App\Http\Controllers\MessagesController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\SecurityQuestionAnswersController;
 use App\Http\Controllers\SecurityQuestionsController;
@@ -74,4 +75,19 @@ Route::get('/users/{user}', [UserDashboardController::class, "show"])->middlewar
 // block
 Route::post('/users/{user}/block', [BlocksController::class, "store"])->middleware('auth:web')->name("block.store");
 Route::post('/users/{user}/unblock', [BlocksController::class, "destroy"])->middleware('auth:web')->name("block.destroy");
+
+
+//messages
+// a route for sending messages ->  post: /messages
+Route::post('/messages', [MessagesController::class, 'store'])->middleware('auth:web')->name('messages.store');
+
+// a route for getting messages -> get: /users/{user}/messages
+Route::get('/users/{user}/messages', [MessagesController::class, "index"])->middleware('auth:web')->name('messages.index');
+
+// a route for deleting messages -> delete : /messages/{message}
+Route::delete('/messages/{message}', [MessagesController::class, "destroy"])->middleware('auth:web')->name('messages.destroy');
+
+// a route for liking message -> like: messages/{message}/like
+//Route::post('/messages/{message}/like', [MessageLikesController::class, 'store'])->middleware('auth:web', 'connected')->name('message_like.store');
+//Route::delete('/messages/{message}/like', [MessageLikesController::class, 'destroy'])->middleware('auth:web', 'connected')->name('message_like.destroy');
 

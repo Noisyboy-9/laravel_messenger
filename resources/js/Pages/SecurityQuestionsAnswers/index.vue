@@ -8,7 +8,6 @@ const deleteAnswer = (id) => {
     console.log(id);
     Inertia.delete(route('security_questions_answers.destroy', id));
 };
-
 defineProps({
     answers: Array,
 });

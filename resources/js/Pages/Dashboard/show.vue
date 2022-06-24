@@ -13,6 +13,10 @@ defineProps({
     }
 });
 
+const goToMessagesPage = (user) => {
+    Inertia.get(`/users/${user.id}/messages`);
+};
+
 const blockUser = (user) => {
     Inertia.post(`/users/${user.id}/block`);
 };
@@ -54,10 +58,19 @@ const inviteUser = (user) => {
 
 
                         <JetButton
-                            class="bg-red-500"
+                            class="bg-red-500 mr-3"
                             @click="blockUser(viewingUser)"
                         >
                             Block
+                        </JetButton>
+
+
+                        <JetButton
+                            v-if="auth.id!==viewingUser.id"
+                            class="bg-indigo-500"
+                            @click="goToMessagesPage(viewingUser)"
+                        >
+                            Start Chatting
                         </JetButton>
                     </div>
                 </div>

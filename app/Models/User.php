@@ -72,17 +72,6 @@ class User extends Authenticatable
         return $this->hasMany(Invite::class, "inviter_id", 'id');
     }
 
-    public function connections(): HasMany
-    {
-        return $this->hasMany(Connection::class, 'connecter_id', 'id');
-    }
-
-    public function connecteds(): HasMany
-    {
-        return $this->hasMany(Invite::class, 'connected_id', 'id');
-    }
-
-
     public function searchableUsing()
     {
         return app(EngineManager::class)->engine('meilisearch');
@@ -92,5 +81,26 @@ class User extends Authenticatable
     {
         return $this->hasMany(Block::class, "blocker_id", "id");
     }
+
+    public function isConnectedWith(User $user): bool
+    {
+        return $this->connections()->where('connected_id', $user->id)->exists();
+    }
+
+    public function connections(): HasMany
+    {
+        return $this->hasMany(Connection::class, 'connecter_id', 'id');
+    }
+
+    public function sentMessages(): HasMany
+    {
+        return $this->hasMany(Message::class, "sender_id", "id");
+    }
+
+    public function receivedMessages(): HasMany
+    {
+        return $this->hasMany(Message::class, "receiver_id", "id");
+    }
 }
+
 
