@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\MessageInsertRequest;
+use App\Http\Requests\Messages\MessageInsertRequest;
 use App\Models\Message;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;

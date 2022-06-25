@@ -1,5 +1,5 @@
 <script setup>
-import { Head, Link, useForm } from '@inertiajs/inertia-vue3';
+import {Head, Link, useForm} from '@inertiajs/inertia-vue3';
 import JetAuthenticationCard from '@/Jetstream/AuthenticationCard.vue';
 import JetAuthenticationCardLogo from '@/Jetstream/AuthenticationCardLogo.vue';
 import JetButton from '@/Jetstream/Button.vue';
@@ -10,6 +10,8 @@ import JetValidationErrors from '@/Jetstream/ValidationErrors.vue';
 
 const form = useForm({
     name: '',
+    phone_number: '',
+    username: '',
     email: '',
     password: '',
     password_confirmation: '',
@@ -24,71 +26,99 @@ const submit = () => {
 </script>
 
 <template>
-    <Head title="Register" />
+    <Head title="Register"/>
 
     <JetAuthenticationCard>
         <template #logo>
-            <JetAuthenticationCardLogo />
+            <JetAuthenticationCardLogo/>
         </template>
 
-        <JetValidationErrors class="mb-4" />
+        <JetValidationErrors class="mb-4"/>
 
         <form @submit.prevent="submit">
             <div>
-                <JetLabel for="name" value="Name" />
+                <JetLabel for="name" value="Name"/>
                 <JetInput
                     id="name"
                     v-model="form.name"
-                    type="text"
+                    autocomplete="name"
+                    autofocus
                     class="mt-1 block w-full"
                     required
-                    autofocus
-                    autocomplete="name"
+                    type="text"
                 />
             </div>
 
             <div class="mt-4">
-                <JetLabel for="email" value="Email" />
+                <JetLabel for="username" value="Username"/>
+                <JetInput
+                    id="username"
+                    v-model="form.username"
+                    class="mt-1 block w-full"
+                    required
+                    type="text"
+                />
+            </div>
+
+            <div class="mt-4">
+                <JetLabel for="phone_number" value="Phone Number"/>
+                <JetInput
+                    id="phone_number"
+                    v-model="form.phone_number"
+                    class="mt-1 block w-full"
+                    required
+                    type="tel"
+                />
+            </div>
+
+            <div class="mt-4">
+                <JetLabel for="email" value="Email"/>
                 <JetInput
                     id="email"
                     v-model="form.email"
-                    type="email"
                     class="mt-1 block w-full"
                     required
+                    type="email"
                 />
             </div>
 
             <div class="mt-4">
-                <JetLabel for="password" value="Password" />
+                <JetLabel for="password" value="Password"/>
                 <JetInput
                     id="password"
                     v-model="form.password"
-                    type="password"
+                    autocomplete="new-password"
                     class="mt-1 block w-full"
                     required
-                    autocomplete="new-password"
+                    type="password"
                 />
             </div>
 
             <div class="mt-4">
-                <JetLabel for="password_confirmation" value="Confirm Password" />
+                <JetLabel for="password_confirmation" value="Confirm Password"/>
                 <JetInput
                     id="password_confirmation"
                     v-model="form.password_confirmation"
-                    type="password"
+                    autocomplete="new-password"
                     class="mt-1 block w-full"
                     required
-                    autocomplete="new-password"
+                    type="password"
                 />
             </div>
 
             <div v-if="$page.props.jetstream.hasTermsAndPrivacyPolicyFeature" class="mt-4">
                 <JetLabel for="terms">
                     <div class="flex items-center">
-                        <JetCheckbox id="terms" v-model:checked="form.terms" name="terms" />
+                        <JetCheckbox id="terms" v-model:checked="form.terms" name="terms"/>
 
                         <div class="ml-2">
-                            I agree to the <a target="_blank" :href="route('terms.show')" class="underline text-sm text-gray-600 hover:text-gray-900">Terms of Service</a> and <a target="_blank" :href="route('policy.show')" class="underline text-sm text-gray-600 hover:text-gray-900">Privacy Policy</a>
+                            I agree to the <a :href="route('terms.show')"
+                                              class="underline text-sm text-gray-600 hover:text-gray-900"
+                                              target="_blank">Terms of
+                            Service</a> and <a :href="route('policy.show')"
+                                               class="underline text-sm text-gray-600 hover:text-gray-900"
+                                               target="_blank">Privacy
+                            Policy</a>
                         </div>
                     </div>
                 </JetLabel>
@@ -99,7 +129,7 @@ const submit = () => {
                     Already registered?
                 </Link>
 
-                <JetButton class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                <JetButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing" class="ml-4">
                     Register
                 </JetButton>
             </div>
