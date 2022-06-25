@@ -2,7 +2,7 @@
 
 namespace App\laravel_messenger;
 
-class LogStatusManager
+class LogPriorityManager
 {
     public const WARNING = 0;
     public const ERROR = 1;

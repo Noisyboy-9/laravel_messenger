@@ -9,7 +9,6 @@ class BlocksController extends Controller
 {
     public function store(User $user): RedirectResponse
     {
-
         auth()->user()->blocks()->create([
             'blocked_id' => $user->id,
         ]);
