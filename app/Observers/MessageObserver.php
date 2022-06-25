@@ -17,12 +17,9 @@ class MessageObserver
      */
     public function created(Message $message)
     {
-        $senderId = $message->sender()->get()->get('id');
-        $receiverId = $message->receiver()->get()->get('id');
-
         Log::create([
             'priority' => LogPriorityManager::INFO,
-            'body' => "user with id: {$senderId} has messaged {$receiverId}"
+            'body' => "user with id: {$message->sender_id} has messaged {$message->receiver_id}"
         ]);
     }
 }
