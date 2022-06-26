@@ -2,9 +2,11 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
@@ -104,6 +106,30 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(Message::class, "receiver_id", "id");
     }
+
+    public function incrementFailedLoginAttemptsCount(): void
+    {
+        $failedLoginAttempt = $this->failedLoginAttempts()->first();
+        $failedLoginAttempt->increment('failed_attempts_count');
+        $failedLoginAttempt->save();
+    }
+
+    public function failedLoginAttempts(): HasOne
+    {
+        return $this->hasOne(FailedLoginAttempt::class, 'user_id', 'id');
+    }
+
+    public function isInLoginPenalty(): bool
+    {
+        $failedLoginAttempts = $this->failedLoginAttempts()->first();
+
+        if ($failedLoginAttempts->penalty_start->isEmpty() || $failedLoginAttempts->penalty_end->isEmpty()) return false;
+
+        return Carbon::parse($failedLoginAttempts->penalty_start)->isPast()
+            && Carbon::parse($failedLoginAttempts->penalty_end)->isFuture();
+    }
+
 }
+
 
 

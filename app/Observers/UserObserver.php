@@ -3,6 +3,7 @@
 namespace App\Observers;
 
 use App\laravel_messenger\LogPriorityManager;
+use App\Models\FailedLoginAttempt;
 use App\Models\Log;
 use App\Models\User;
 
@@ -20,6 +21,11 @@ class UserObserver
         Log::create([
             'priority' => LogPriorityManager::INFO,
             'body' => "A new user with id: {$user->id} & username: {$user->username} & email: {$user->email} has been created"
+        ]);
+
+        FailedLoginAttempt::create([
+            'user_id' => $user->id,
+            'failed_attempts_count' => 0,
         ]);
     }
 
