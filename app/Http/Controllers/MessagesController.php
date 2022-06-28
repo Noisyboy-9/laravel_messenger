@@ -27,6 +27,7 @@ class MessagesController extends Controller
 
     public function store(MessageInsertRequest $request): RedirectResponse
     {
+
         auth()->user()->sentMessages()->create([
             'receiver_id' => $request->get('receiver_id'),
             'body' => $request->get('body')
