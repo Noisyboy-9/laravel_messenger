@@ -32,7 +32,7 @@ defineProps({
                     </div>
 
 
-                    <h2 class="font-semibold mt-4 text-xl text-gray-800 leading-tight">
+                    <h2 class="font-semibold mt-4 text-xl text-gray-800 leading-tight mb-4">
                         Your connections
                     </h2>
 
@@ -46,7 +46,7 @@ defineProps({
 
                         <div>
                             <p class="ml-3 font-medium text-sm truncate">
-                                {{ connection.created_at }}
+                                {{ new Date(connection.created_at).toLocaleDateString() }}
                             </p>
                         </div>
                     </div>
