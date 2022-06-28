@@ -1378,6 +1378,9 @@ select{
 .self-end{
   align-self: flex-end;
 }
+.self-center{
+  align-self: center;
+}
 .overflow-hidden{
   overflow: hidden;
 }
@@ -1660,6 +1663,9 @@ select{
 }
 .align-baseline{
   vertical-align: baseline;
+}
+.align-middle{
+  vertical-align: middle;
 }
 .font-sans{
   font-family: Nunito, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";

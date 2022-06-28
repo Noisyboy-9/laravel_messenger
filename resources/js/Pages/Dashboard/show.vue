@@ -51,7 +51,7 @@ const cancelInvite = (user) => {
     <AppLayout :title="viewingUser.name">
         <template v-if="auth.id!==viewingUser.id" #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ viewingUser.name }}
+                {{ viewingUser.name }}'s Profile
             </h2>
         </template>
 

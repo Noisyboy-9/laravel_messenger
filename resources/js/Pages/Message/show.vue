@@ -7,16 +7,23 @@ import {Inertia} from '@inertiajs/inertia';
 
 defineProps({
     messages: {
-        type: Object,
+        type: Array,
         default: []
     },
-    auth: Object,
-    chattingWithUser: Object
+    auth: {
+        type: Object,
+        default: {},
+    },
+    chattingWithUser: {
+        type: Object,
+        default: {}
+    }
 });
 
 const deleteMessage = (message) => {
     Inertia.delete(`/messages/${message.id}`);
 };
+
 const sendMessage = (receiver, sender) => {
     form.sender_id = sender.id;
     form.receiver_id = receiver.id;
@@ -59,17 +66,21 @@ const form = useForm({
             </div>
 
 
-            <div class="self-start">
-                <div v-for="message in messages">
-                    <p>-----------</p>
-                    <p>{{ message.sender.name + ':' + message.body }}</p>
-                    <p>{{ message.created_at }}</p>
+            <div class="self-start w-full py-6 px-4">
+                <div v-for="message in messages" class="mb-6">
+                    <div class="flex align-middle">
+                        <img :src="message.sender.profile_photo_url"
+                             alt="profile"
+                             class="inline object-cover w-12 h-12 mr-2 rounded-full">
+                        <p class="self-center">{{ message.body }}</p>
+                    </div>
+                    <p>{{ (new Date(message.created_at)).toLocaleString() }}</p>
                     <JetButton class="mr-3" @click="likeMessage(message)">Like</JetButton>
                     <JetButton class="mr-3" @click="unLikeMessage(message)">Unlike</JetButton>
-                    <JetDangerButton v-if="message.sender_id === auth.id" class="mr-3" @click="deleteMessage(message)">
+                    <JetDangerButton v-if="message.sender_id === auth.id" class="mr-3"
+                                     @click="deleteMessage(message)">
                         Delete
                     </JetDangerButton>
-                    <p>-----------</p>
                 </div>
             </div>
         </div>
