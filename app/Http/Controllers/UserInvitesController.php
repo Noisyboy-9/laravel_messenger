@@ -35,9 +35,28 @@ class UserInvitesController extends Controller
         Invite::create([
             'inviter_id' => auth()->id(),
             'invited_id' => $user->id,
-            'accepted' => false,
+            'status' => InviteStatusManager::WAITING,
         ]);
 
         return redirect()->back();
     }
+
+    /**
+     * delete the given invite
+     *
+     * @param \App\Models\User $user
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function destroy(User $user): RedirectResponse
+    {
+        Invite::where([
+            'inviter_id' => auth()->id(),
+            'invited_id' => $user->id,
+        ])->delete();
+
+
+        return redirect()->back();
+    }
 }
+

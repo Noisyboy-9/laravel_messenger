@@ -63,6 +63,7 @@ Route::get('/invited', [UserInvitedController::class, 'index'])->middleware('aut
 Route::get('/connections', [UserConnectionsController::class, 'index'])->middleware('auth:web')->name('connections');
 
 Route::post('/users/{user}/invite', [UserInvitesController::class, 'store'])->middleware('auth:web');
+Route::delete('/users/{user}/invite', [UserInvitesController::class, 'destroy'])->middleware('auth:web');
 Route::post('/invites/{invite}/accept', [InviteResultController::class, 'accept'])->middleware('auth:web');
 Route::post('/invites/{invite}/reject', [InviteResultController::class, 'reject'])->middleware('auth:web');
 

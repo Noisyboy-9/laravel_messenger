@@ -35,12 +35,7 @@ class BlocksController extends Controller
 
     public function destroy(User $user): RedirectResponse
     {
-        $block = auth()->user()->blocks()->where('blocked_id', $user->id)->get();
-
-        if ($block) {
-            $block->delete();
-        }
-
+        auth()->user()->blocks()->where('blocked_id', $user->id)->delete();
         return redirect()->back();
     }
 }

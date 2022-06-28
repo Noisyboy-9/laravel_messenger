@@ -9,12 +9,29 @@ defineProps({
         default: []
     },
     auth: {
-        type: Object
+        type: Object,
+        default: [],
+    },
+    hasConnectionWithViewingUser: {
+        type: Boolean,
+        default: false,
+    },
+    hasBlockedViewingUser: {
+        type: Boolean,
+        default: false,
+    },
+    hasInvitedViewingUser: {
+        type: Boolean,
+        default: false,
     }
 });
 
 const goToMessagesPage = (user) => {
     Inertia.get(`/users/${user.id}/messages`);
+};
+
+const unBlockUser = (user) => {
+    Inertia.post(`/users/${user.id}/unblock`);
 };
 
 const blockUser = (user) => {
@@ -23,6 +40,10 @@ const blockUser = (user) => {
 
 const inviteUser = (user) => {
     Inertia.post(`/users/${user.id}/invite`);
+};
+
+const cancelInvite = (user) => {
+    Inertia.delete(`/users/${user.id}/invite`);
 };
 
 </script>
@@ -48,30 +69,48 @@ const inviteUser = (user) => {
                     </h2>
 
 
-                    <div v-if="viewingUser.id !== auth.id">
+                    <div>
                         <JetButton
+                            v-if="(auth.id !== viewingUser.id) && !hasInvitedViewingUser"
                             class="mr-3 bg-green-600"
                             @click="inviteUser(viewingUser)"
                         >
                             Invite
                         </JetButton>
 
+                        <div
+                            v-if="(viewingUser.id !== auth.id) && hasInvitedViewingUser && !hasConnectionWithViewingUser">
+                            <JetButton
+                                class="mr-3 bg-green-600"
+                                @click="cancelInvite(viewingUser)"
+                            >
+                                Cancel Invite
+                            </JetButton>
 
-                        <JetButton
-                            class="bg-red-500 mr-3"
-                            @click="blockUser(viewingUser)"
-                        >
-                            Block
-                        </JetButton>
 
+                            <JetButton
+                                v-if="(viewingUser.id !== auth.id) && !hasBlockedViewingUser"
+                                class="bg-red-500 mr-3"
+                                @click="blockUser(viewingUser)"
+                            >
+                                Block
+                            </JetButton>
 
-                        <JetButton
-                            v-if="auth.id!==viewingUser.id"
-                            class="bg-indigo-500"
-                            @click="goToMessagesPage(viewingUser)"
-                        >
-                            Start Chatting
-                        </JetButton>
+                            <JetButton v-if="(viewingUser.id !== auth.id) && hasBlockedViewingUser"
+                                       class="bg-red-500 mr-3"
+                                       @click="unBlockUser(viewingUser)"
+                            >
+                                unblock
+                            </JetButton>
+
+                            <JetButton
+                                v-if="viewingUser.id !== auth.id"
+                                class="bg-indigo-500"
+                                @click="goToMessagesPage(viewingUser)"
+                            >
+                                Start Chatting
+                            </JetButton>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\laravel_messenger\InviteStatusManager;
 use Carbon\Carbon;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -123,12 +124,39 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         $failedLoginAttempts = $this->failedLoginAttempts()->first();
 
-        if ($failedLoginAttempts->penalty_start->isEmpty() || $failedLoginAttempts->penalty_end->isEmpty()) return false;
+        if ($failedLoginAttempts->penalty_start === null || $failedLoginAttempts->penalty_end === null) return false;
 
         return Carbon::parse($failedLoginAttempts->penalty_start)->isPast()
             && Carbon::parse($failedLoginAttempts->penalty_end)->isFuture();
     }
 
+    public function hasConnectionWithViewingUser(User $user)
+    {
+        return Connection::where([
+            'connecter_id' => $user->id,
+            'connected_id' => auth()->id()
+        ])->orWhere([
+            'connected_id' => $user->id,
+            'connecter_id' => auth()->id()
+        ])->exists();
+    }
+
+    public function hasBlockedViewingUser(User $user)
+    {
+        return Block::where([
+            'blocker_id' => auth()->id(),
+            'blocked_id' => $user->id,
+        ])->exists();
+    }
+
+    public function hasInvitedViewingUser(User $user)
+    {
+        return Invite::where([
+            'inviter_id' => auth()->id(),
+            'invited_id' => $user->id,
+            'status' => InviteStatusManager::WAITING,
+        ])->exists();
+    }
 }
 
 

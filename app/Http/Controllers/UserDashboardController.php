@@ -13,6 +13,9 @@ class UserDashboardController extends Controller
         return inertia('Dashboard/show', [
             "viewingUser" => $user,
             "auth" => auth()->user(),
+            "hasConnectionWithViewingUser" => auth()->user()->hasConnectionWithViewingUser($user),
+            "hasBlockedViewingUser" => auth()->user()->hasBlockedViewingUser($user),
+            "hasInvitedViewingUser" => auth()->user()->hasInvitedViewingUser($user),
         ]);
     }
 }

@@ -1,5 +1,6 @@
 <?php
 
+
 namespace App\Actions\Fortify;
 
 use App\Models\User;
