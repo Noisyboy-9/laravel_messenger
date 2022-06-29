@@ -30523,9 +30523,9 @@ var _hoisted_6 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
     "class": "max-w-6xl mx-auto sm:px-6 lg:px-8"
   }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", {
-    "class": "text-white text-3xl text-center mb-4"
+    "class": "text-3xl text-center mb-4"
   }, "Laravel Messenger"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
-    "class": "text-white text-center"
+    "class": "text-center"
   }, "Please Login")], -1
   /* HOISTED */
   );
