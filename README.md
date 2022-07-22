@@ -1,64 +1,45 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# Laravel Messenger - DB final project
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+At 2022 spring semester, I selected the course: Principles of database design under supervision
+of [Dr. shahriayari](https://aut.ac.ir/cv/2384/%D8%A7%D8%AD%D8%B3%D8%A7%D9%86-%D9%86%D8%A7%D8%B8%D8%B1-%D9%81%D8%B1%D8%AF?slc_lang=fa&&cv=2384&mod=scv)
+. <br>
 
-## About Laravel
+As the final project of the course we were tasked to implement a chatting service similar to facebook messenger.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- authentication
+- Users searching
+- Invite to connection
+- Blocking / unblocking other users
+- Active session management
+- message inbox
+- Add / Remove from Connections list
+- Like message
+- Logging
+- 3 time fail login throttle
+- Delete account
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## technical specs
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+In this project I have used:
 
-## Learning Laravel
+- Php/Laravel: as the backend framework
+- Laravel Jet-stream: as frontend scaffolding
+- Vue3: as frontend framework
+- Inertia.js: as server side rendering and server side routing
+- tailwind css: as css framework
+- mailgun api: as emailing service
+- Laravel sail: for containerization of the project( uses docker under the hood)
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## screenshots
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+![home page area](/app/laravel_messenger/documentation/screenshots/homepage.png "homepage area")
+![register](/app/laravel_messenger/documentation/screenshots/register.png "register area")
+![login](/app/laravel_messenger/documentation/screenshots/login.png "login area")
+![dashboard](/app/laravel_messenger/documentation/screenshots/dashboard.png "dashboard")
+![user-search](/app/laravel_messenger/documentation/screenshots/user-search.png "search")
+![invites](/app/laravel_messenger/documentation/screenshots/invites.png "invites")
+![connections](/app/laravel_messenger/documentation/screenshots/connections.png "connections")
+![chat area](/app/laravel_messenger/documentation/screenshots/chat%20area.png "chat area")
+![profile](/app/laravel_messenger/documentation/screenshots/profile.png "profile")
+![user settings - 1](/app/laravel_messenger/documentation/screenshots/user-settings-area-1.png "settings 1")
+![user settings - 2](/app/laravel_messenger/documentation/screenshots/user-settings-area-2.png "settings 2")

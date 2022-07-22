@@ -30,7 +30,7 @@ defineProps({
             </template>
         </div>
 
-        <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
+        <div class="max-w-6xl mx-auto sm:px-6 lg:px-8 text-white">
             <h1 class="text-3xl text-center mb-4">Laravel Messenger</h1>
             <p class="text-center">Please Login</p>
         </div>
