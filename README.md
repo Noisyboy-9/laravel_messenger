@@ -82,7 +82,7 @@ The necessary steps are:
 5. Compile frontend assets
    this command starts a npm build process inside the application-container which your laravel project files sit:
     ```bash
-   $ sail npm run watch 
+   $ /vendor/bin/sail npm run watch 
    ```
 
 
