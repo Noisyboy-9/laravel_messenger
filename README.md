@@ -46,7 +46,7 @@ In this project I have used:
 
 ## Installation
 
-In order to be able to run this project you must have this things installed on your local computer:
+In order to be able to run this project you must have these things installed on your local computer:
 
 - docker
 - laravel sail
