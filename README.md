@@ -1,7 +1,7 @@
 # Laravel Messenger - DB final project
 
 At 2022 spring semester, I selected the course: Principles of database design under supervision
-of [Dr. shahriayari](https://aut.ac.ir/cv/2384/%D8%A7%D8%AD%D8%B3%D8%A7%D9%86-%D9%86%D8%A7%D8%B8%D8%B1-%D9%81%D8%B1%D8%AF?slc_lang=fa&&cv=2384&mod=scv)
+of [Dr. shahriayari](https://ceit.aut.ac.ir/shahriari)
 . <br>
 
 As the final project of the course we were tasked to implement a chatting service similar to facebook messenger.
