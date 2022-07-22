@@ -43,3 +43,46 @@ In this project I have used:
 ![profile](/app/laravel_messenger/documentation/screenshots/profile.png "profile")
 ![user settings - 1](/app/laravel_messenger/documentation/screenshots/user-settings-area-1.png "settings 1")
 ![user settings - 2](/app/laravel_messenger/documentation/screenshots/user-settings-area-2.png "settings 2")
+
+## Installation
+
+In order to be able to run this project you must have this things installed on your local computer:
+
+- docker
+- laravel sail
+- npm
+
+The necessary steps are:
+
+1. Clone the project
+   To have project folder on your local machine.
+    ```bash 
+   $ git clone https://github.com/Noisyboy-9/laravel_messenger.git
+   ```
+
+2. create .env file
+   Run the following command to create a new copy of .env.example file and name it .env:
+    ```bash
+   $ cp .env.example .env
+   ```
+
+3. generate project keys
+   Run the following command to generate a project key:
+    ```bash
+   $ php artisan key:generate
+    ```
+
+4. Start external services
+   As mentioned before this project uses laravel-sail for containerization so after installing laravel-sail run the
+   following command to start services:
+    ```bash
+   $ /vendor/bin/sail up
+   ```
+
+5. Compile frontend assets
+   this command starts a npm build process inside the application-container which your laravel project files sit:
+    ```bash
+   $ sail npm run watch 
+   ```
+
+
