@@ -50,7 +50,6 @@ In order to be able to run this project you must have these things installed on 
 
 - docker
 - laravel sail
-- npm
 
 The necessary steps are:
 
